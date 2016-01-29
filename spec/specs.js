@@ -16,3 +16,12 @@ describe("PizzaMenu", function() {
     expect(menu.getToppings()).to.equal("<div>Pepperoni</div><div>Beef</div><div>Black Olives</div><div>Canadian Bacon</div><div>Crispy Bacon</div><div>Garlic</div><div>Green Peppers</div><div>Grilled Chicken</div><div>Herb & Cheese Blend</div><div>Italian Sausage</div><div>Artichoke Hearts</div><div>Mixed Onions</div><div>Mozzarella Cheese</div><div>Mushrooms</div><div> Onions</div><div>Parmesan Cheese</div><div>Pineapple</div><div>Roma Tomatoes</div><div>Salami</div><div>Spinach</div><div>Sun-Dried Tomatoes</div><div>Zucchini</div><div>Extra Cheese</div>");
   });
 });
+
+describe('Pizza', function() {
+  it('knows it own size', function() {
+    var menu = new PizzaMenu();
+    var pizza = new Pizza();
+    pizza.size = menu.sizes[0];
+    expect(pizza.size).to.equal('Personal 8"');
+  });
+});

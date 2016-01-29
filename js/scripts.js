@@ -14,10 +14,18 @@ PizzaMenu.prototype.costOfPizza = function(size, numOfToppings) {
   return cost;
 }
 
-PizzaMenu.prototype.getToppings = function() {
+PizzaMenu.prototype.putArrayInDiv = function(arrayIn) {
   var output = '';
-  this.toppings.forEach(function(topping) {
-    output += '<div>' + topping + '</div>';
+  arrayIn.forEach(function(elem) {
+    output += '<div>' + elem + '</div>';
   });
   return output;
+}
+
+PizzaMenu.prototype.getToppings = function() {
+  return this.putArrayInDiv(this.toppings);
+}
+
+function Pizza() {
+  this.size='';
 }
