@@ -13,3 +13,16 @@
 .selected {
   background:lightgray;
 }
+#checkout, #buildPizza {
+  text-align: center;
+  width:300px;
+  font-size: 2em;
+  border-radius: 10px;
+  border:1px solid;
+  padding:10px;
+  margin:10px auto;
+  cursor:pointer;
+}
+#checkout {
+  display: none;
+}

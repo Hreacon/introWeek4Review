@@ -78,6 +78,15 @@ Cart.prototype.countPizzas = function() {
   return this.pizzas.length;
 }
 
+Cart.prototype.getTotalCost = function() {
+  var total = 0;
+  var menu = new PizzaMenu();
+  pizzas.forEach(function(pizza) {
+    total += menu.costOfPizza(pizza.size, pizza.countToppings());
+  });
+  return total;
+}
+
 function updateCurrentOrder(menu, pizza) {
   var output = "Size: " + pizza.size + " Toppings: " + pizza.getToppings();
   output += ' Price: $' + menu.costOfPizza(pizza.size, pizza.countToppings());
