@@ -46,3 +46,11 @@ describe('Pizza', function() {
     expect(pizza.countToppings()).to.equal(1);
   });
 });
+
+describe("Cart", function() {
+  it('contains the pizzas to be bought', function() {
+    var cart = new Cart();
+    cart.addPizza(new Pizza());
+    expect(cart.countPizzas()).to.equal(1);
+  });
+});

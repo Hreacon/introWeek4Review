@@ -66,6 +66,18 @@ Pizza.prototype.getToppings = function() {
   return output;
 }
 
+function Cart() {
+  this.pizzas = [];
+}
+
+Cart.prototype.addPizza = function(pizza) {
+  this.pizzas.push(pizza);
+}
+
+Cart.prototype.countPizzas = function() {
+  return this.pizzas.length;
+}
+
 function updateCurrentOrder(menu, pizza) {
   var output = "Size: " + pizza.size + " Toppings: " + pizza.getToppings();
   output += ' Price: $' + menu.costOfPizza(pizza.size, pizza.countToppings());
