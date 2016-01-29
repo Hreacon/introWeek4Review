@@ -2,7 +2,7 @@
   display: none;
 }
 
-.sizes div, .toppings div{
+.sizes div, .toppings div, .currentOrder div, #addToCart {
   display:inline-block;
   border:1px solid black;
   border-radius:5px;

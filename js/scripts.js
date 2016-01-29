@@ -7,11 +7,13 @@ function PizzaMenu() {
 }
 
 PizzaMenu.prototype.costOfPizza = function(size, numOfToppings) {
-  var cost = this.costPerSize[this.sizes.indexOf(size)];
+  var cost = 0;
+  if(this.sizes.indexOf(size) >= 0)
+    cost += this.costPerSize[this.sizes.indexOf(size)];
   if(numOfToppings > this.firstToppingsIncluded) {
     cost += (numOfToppings - this.firstToppingsIncluded) * this.costPerTopping;
   }
-  return cost;
+  return Math.floor(Math.round(cost*100))/100;
 }
 
 PizzaMenu.prototype.putArrayInDiv = function(arrayIn) {
@@ -68,6 +70,17 @@ function updateCurrentOrder(menu, pizza) {
   var output = "Size: " + pizza.size + " Toppings: " + pizza.getToppings();
   output += ' Price: $' + menu.costOfPizza(pizza.size, pizza.countToppings());
   $('.currentOrder').html(output);
+  $('.currentOrder div').each(function() {
+    $(this).click(function() {
+      pizza.toggleTopping($(this).html());
+      updateCurrentOrder(menu, pizza);
+      var topping = $(this).html();
+      $('.toppings div').each(function() {
+        if($(this).html() === topping)
+          $(this).toggleClass('selected');
+      });
+    });
+  });
 }
 
 $(document).ready(function() {
