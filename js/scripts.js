@@ -87,6 +87,10 @@ Cart.prototype.getTotalCost = function() {
   return total;
 }
 
+Cart.prototype.removePizza = function(index) {
+  this.pizzas.splice(index,1);
+}
+
 function updateCurrentOrder(menu, pizza) {
   var output = "Size: " + pizza.size + " Toppings: " + pizza.getToppings();
   output += ' Price: $' + menu.costOfPizza(pizza.size, pizza.countToppings());
@@ -104,37 +108,51 @@ function updateCurrentOrder(menu, pizza) {
   });
 }
 
+function updateCart(cart) {
+  // show current pizzas being ordered
+  // show total
+  if(cart.countPizzas() > 0) {
+    $('#checkout').show();
+  }
+}
+
+function buildPizza(menu, pizza) {
+  updateCurrentOrder(menu, pizza);
+  $('.landing').hide();
+  $('.order').show();
+  $('.sizes').html(menu.getSizes());
+  $('.sizes div').each(function() {
+    $(this).click(function() {
+      pizza.size = $(this).html();
+      updateCurrentOrder(menu, pizza);
+      $('.sizes div').each(function() {
+        $(this).removeClass('selected');
+      });
+      $(this).addClass('selected');
+    });
+  });
+  $('.toppings').html(menu.getToppings());
+  $('.toppings div').each(function() {
+    $(this).click(function() {
+      pizza.toggleTopping($(this).html());
+      $(this).toggleClass('selected');
+      updateCurrentOrder(menu, pizza);
+    });
+  });
+  $('#addToCart').click(function() {
+    cart.addPizza(pizza);
+    $('.order').hide();
+    $('.landing').show();
+    updateCart(cart);
+  });
+}
+
 $(document).ready(function() {
   var cart = new Cart();
   var menu = new PizzaMenu();
   var pizza;
   $('#buildPizza').click(function() {
     pizza = new Pizza();
-    updateCurrentOrder(menu, pizza);
-    $('.landing').hide();
-    $('.order').show();
-    $('.sizes').html(menu.getSizes());
-    $('.sizes div').each(function() {
-      $(this).click(function() {
-        pizza.size = $(this).html();
-        updateCurrentOrder(menu, pizza);
-        console.log("New Pizza size = " + pizza.size);
-        $('.sizes div').each(function() {
-          $(this).removeClass('selected');
-        });
-        $(this).addClass('selected');
-      });
-    });
-    $('.toppings').html(menu.getToppings());
-    $('.toppings div').each(function() {
-      $(this).click(function() {
-        pizza.toggleTopping($(this).html());
-        $(this).toggleClass('selected');
-        updateCurrentOrder(menu, pizza);
-      });
-    });
-    $('#addToCart').click(function() {
-
-    })
+    buildPizza(menu, pizza);
   });
 });
