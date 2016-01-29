@@ -81,7 +81,7 @@ Cart.prototype.countPizzas = function() {
 Cart.prototype.getTotalCost = function() {
   var total = 0;
   var menu = new PizzaMenu();
-  pizzas.forEach(function(pizza) {
+  this.pizzas.forEach(function(pizza) {
     total += menu.costOfPizza(pizza.size, pizza.countToppings());
   });
   return total;
@@ -94,9 +94,17 @@ Cart.prototype.removePizza = function(index) {
 Cart.prototype.getPizzas = function() {
   var output = '';
   this.pizzas.forEach(function(pizza, index) {
-    output += '<div class="row"><div pizzaid="' + index + '" class="edit">' + pizza.size + ', ' + pizza.getToppings() + '</div> <div pizzaid="' + index + '" class="remove">Remove From Order</div></div>';
+    output += '<div class="row"><div pizzaid="' + index + '" class="edit">' + pizza.size + ', ' + pizza.getToppings() + '</div> <div pizzaid="' + index + '" class="remove">X</div></div>';
   });
   return output;
+}
+
+Cart.prototype.cleanCart = function() {
+  this.pizzas.forEach(function(pizza, index) {
+    if(pizza.size.length === 0) {
+      this.removePizza(index);
+    }
+  })
 }
 
 function updateCurrentOrder(menu, pizza) {
@@ -122,6 +130,8 @@ function updateCart(cart) {
   if(cart.countPizzas() > 0) {
     $('#checkout').show();
     $('#cart').html(cart.getPizzas());
+    $('.total').show();
+    $('.total').html('$' + cart.getTotalCost());
     $('.edit').each(function() {
       $(this).click(function() {
         buildPizza(cart, new PizzaMenu(), cart.pizzas[$(this).attr('pizzaid')]);
@@ -133,6 +143,10 @@ function updateCart(cart) {
         updateCart(cart);
       });
     });
+  } else {
+    $("#checkout").hide();
+    $("#cart").hide();
+    $(".total").hide();
   }
 }
 
