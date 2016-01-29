@@ -34,3 +34,7 @@ function Pizza() {
 Pizza.prototype.addTopping = function(topping) {
   this.toppings.push(topping);
 }
+
+Pizza.prototype.countToppings = function() {
+  return this.toppings.length;
+}

@@ -30,5 +30,10 @@ describe('Pizza', function() {
     pizza.addTopping(menu.toppings[0]);
     expect(pizza.toppings[0]).to.equal('Pepperoni');
   });
-  
+  it('can tell you how many toppings it has', function() {
+    var menu = new PizzaMenu();
+    var pizza = new Pizza();
+    pizza.addTopping(menu.toppings[0]);
+    expect(pizza.countToppings()).to.equal(1);
+  });
 });
