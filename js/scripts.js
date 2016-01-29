@@ -64,8 +64,9 @@ Pizza.prototype.getToppings = function() {
   return output;
 }
 
-function updateCurrentOrder(pizza) {
+function updateCurrentOrder(menu, pizza) {
   var output = "Size: " + pizza.size + " Toppings: " + pizza.getToppings();
+  output += ' Price: $' + menu.costOfPizza(pizza.size, pizza.countToppings());
   $('.currentOrder').html(output);
 }
 
@@ -74,13 +75,14 @@ $(document).ready(function() {
   var pizza;
   $('#buildPizza').click(function() {
     pizza = new Pizza();
+    updateCurrentOrder(menu, pizza);
     $('.landing').hide();
     $('.order').show();
     $('.sizes').html(menu.getSizes());
     $('.sizes div').each(function() {
       $(this).click(function() {
         pizza.size = $(this).html();
-        updateCurrentOrder(pizza);
+        updateCurrentOrder(menu, pizza);
         console.log("New Pizza size = " + pizza.size);
         $('.sizes div').each(function() {
           $(this).removeClass('selected');
@@ -89,5 +91,12 @@ $(document).ready(function() {
       });
     });
     $('.toppings').html(menu.getToppings());
+    $('.toppings div').each(function() {
+      $(this).click(function() {
+        pizza.toggleTopping($(this).html());
+        $(this).toggleClass('selected');
+        updateCurrentOrder(menu, pizza);
+      });
+    });
   });
 });
