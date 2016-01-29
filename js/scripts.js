@@ -26,13 +26,26 @@ PizzaMenu.prototype.getToppings = function() {
   return this.putArrayInDiv(this.toppings);
 }
 
+PizzaMenu.prototype.getSizes = function() {
+  var sizeAndPrice = [];
+  for(var i=0;i<this.sizes.length;i++) {
+    sizeAndPrice.push(this.sizes[i]);
+  }
+  return this.putArrayInDiv(sizeAndPrice);
+}
+
 function Pizza() {
   this.size='';
   this.toppings = [];
 }
-
+Pizza.prototype.toggleTopping = function(topping) {
+  var index = this.toppings.indexOf(topping);
+  if( index >= 0) {
+    this.toppings.splice(index, 1);
+  } else this.toppings.push(topping);
+}
 Pizza.prototype.addTopping = function(topping) {
-  this.toppings.push(topping);
+  this.togleTopping(topping);
 }
 
 Pizza.prototype.countToppings = function() {
@@ -40,8 +53,5 @@ Pizza.prototype.countToppings = function() {
 }
 
 Pizza.prototype.removeTopping = function(topping) {
-  var index = this.toppings.indexOf(topping);
-  if( index >= 0) {
-    this.toppings.splice(index, 1);
-  }
+  this.toggleTopping(topping);
 }
