@@ -1,8 +1,8 @@
-.order {
+.order, #checkout {
   display: none;
 }
 
-.sizes div, .toppings div, .currentOrder div, #addToCart {
+.sizes div, .toppings div, .currentOrder div, #addToCart, .edit, .remove {
   display:inline-block;
   border:1px solid black;
   border-radius:5px;
@@ -10,10 +10,12 @@
   margin:10px;
   cursor:pointer;
 }
-.selected {
-  background:lightgray;
+.edit > div {
+  font-size:.5em;
+  margin:5px;
 }
-#checkout, #buildPizza, .row {
+
+#checkout, #buildPizza, .edit {
   text-align: center;
   width:300px;
   font-size: 2em;
@@ -24,17 +26,38 @@
   cursor:pointer;
 }
 
-#checkout:hover, #buildPizza:hover, .sizes div:hover, .toppings div:hover, .currentOrder div:hover, #addToCart:hover {
+.row {
+  margin:auto;
+}
+/*.edit {
+  display: inline-block;
+  width:80%;
+}
+
+.remove {
+  text-align: center;
+  font-size: 2em;
+  border-radius: 10px;
+  border:1px solid;
+  padding:10px;
+  margin:10px auto;
+  cursor:pointer;
+  display: inline-block;
+  width:10%;
+  line-height:100%;
+}*/
+
+#checkout:hover, #buildPizza:hover, .sizes div:hover, .toppings div:hover, .currentOrder div:hover, #addToCart:hover, .edit:hover, .remove:hover, .selected {
   background:lightgray;
 }
-#checkout {
-  display: none;
-}
+
+
+
 .row {
   width:500px;
 }
-.remove {
-  position: absolute;
-  top:0;
-  right:10;
+
+.total {
+  text-align: center;
+  font-size:1.5em;
 }

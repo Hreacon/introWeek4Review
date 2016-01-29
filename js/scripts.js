@@ -1,7 +1,7 @@
 function PizzaMenu() {
   this.sizes = ['Personal 8"', 'Small 10"', 'Medium 12"', 'Large 14"', 'Family 16"'];
   this.costPerSize = [ 8.99, 10.99, 12.99, 14.99, 16.99 ];
-  this.toppings = ['Pepperoni', 'Beef',  'Black Olives',   'Canadian Bacon',  'Crispy Bacon',   'Garlic',   'Green Peppers',  'Grilled Chicken',   'Herb & Cheese Blend',   'Italian Sausage',  'Artichoke Hearts',   'Mixed Onions',   'Mozzarella Cheese',  'Mushrooms',  ' Onions',   'Parmesan Cheese',    'Pineapple',   'Roma Tomatoes',  'Salami',   'Spinach',   'Sun-Dried Tomatoes',  'Zucchini',   'Extra Cheese'];
+  this.toppings = ['Pepperoni', 'Beef',  'Black Olives',   'Canadian Bacon',  'Crispy Bacon',   'Garlic',   'Green Peppers',  'Grilled Chicken',   'Herb & Cheese Blend',   'Italian Sausage',  'Artichoke Hearts',   'Mixed Onions',   'Mozzarella Cheese',  'Mushrooms',  ' Onions',   'Parmesan Cheese',    'Pineapple',   'Roma Tomatoes',  'Salami',   'Spinach',   'Sun-Dried Tomatoes',  'Zucchini', 'Cheese', 'Extra Cheese'];
   this.costPerTopping = 1;
   this.firstToppingsIncluded = 2;
 }
@@ -38,7 +38,7 @@ PizzaMenu.prototype.getSizes = function() {
 
 function Pizza() {
   this.size='';
-  this.toppings = [];
+  this.toppings = ['Cheese'];
 }
 Pizza.prototype.toggleTopping = function(topping) {
   var index = this.toppings.indexOf(topping);
@@ -94,7 +94,7 @@ Cart.prototype.removePizza = function(index) {
 Cart.prototype.getPizzas = function() {
   var output = '';
   this.pizzas.forEach(function(pizza, index) {
-    output += '<div class="row"><div pizzaid="' + index + '" class="edit">' + pizza.size + ', ' + pizza.getToppings() + '</div> <div pizzaid="' + index + '" class="remove">X</div></div>';
+    output += '<div class="row"><div pizzaid="' + index + '" class="edit">' + pizza.size + ', <div class="toppings">' + pizza.getToppings() + '</div></div> <div pizzaid="' + index + '" class="remove">X</div></div>';
   });
   return output;
 }
@@ -127,9 +127,12 @@ function updateCurrentOrder(menu, pizza) {
 function updateCart(cart) {
   // show current pizzas being ordered
   // show total
+  console.log("UpdateCart");
+  cart.cleanCart();
   if(cart.countPizzas() > 0) {
     $('#checkout').show();
     $('#cart').html(cart.getPizzas());
+    $("#cart").show();
     $('.total').show();
     $('.total').html('$' + cart.getTotalCost());
     $('.edit').each(function() {
@@ -193,4 +196,5 @@ $(document).ready(function() {
     cart.addPizza(pizza);
     buildPizza(cart, menu, pizza);
   });
+  
 });
