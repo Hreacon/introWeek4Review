@@ -201,7 +201,6 @@ $(document).ready(function() {
     $('#checkoutForm').show();
   });
   $("#checkoutForm form").submit(function(event) {
-    // check for all the inputs
     var formData = [];
     var mistakes = 0;
     var index = 0;
@@ -214,15 +213,14 @@ $(document).ready(function() {
         formData[index] = [$(this).attr('id'), $(this).val()];
         index++;
       }
-
-      if(mistakes === 0) {
-        $("#checkoutForm").hide();
-        $('.orderComplete').show();
-        formData.forEach(function(data) {
-          $('#output'+data[0]).text(data[1]);
-        });
-      }
     });
+    if(mistakes === 0) {
+      $("#checkoutForm").hide();
+      $('.orderComplete').show();
+      formData.forEach(function(data) {
+        $('#output'+data[0]).text(data[1]);
+      });
+    }
     event.preventDefault();
   });
 });
