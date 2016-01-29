@@ -91,6 +91,14 @@ Cart.prototype.removePizza = function(index) {
   this.pizzas.splice(index,1);
 }
 
+Cart.prototype.getPizzas = function() {
+  var output = '';
+  this.pizzas.forEach(function(pizza, index) {
+    output += '<div class="row"><div pizzaid="' + index + '" class="edit">' + pizza.size + ', ' + pizza.getToppings() + '</div> <div pizzaid="' + index + '" class="remove">Remove From Order</div></div>';
+  });
+  return output;
+}
+
 function updateCurrentOrder(menu, pizza) {
   var output = "Size: " + pizza.size + " Toppings: " + pizza.getToppings();
   output += ' Price: $' + menu.costOfPizza(pizza.size, pizza.countToppings());
@@ -116,12 +124,14 @@ function updateCart(cart) {
   }
 }
 
-function buildPizza(menu, pizza) {
+function buildPizza(cart, menu, pizza) {
   updateCurrentOrder(menu, pizza);
   $('.landing').hide();
   $('.order').show();
   $('.sizes').html(menu.getSizes());
   $('.sizes div').each(function() {
+    if(pizza.size === $(this).html())
+      $(this).addClass('selected');
     $(this).click(function() {
       pizza.size = $(this).html();
       updateCurrentOrder(menu, pizza);
@@ -133,6 +143,8 @@ function buildPizza(menu, pizza) {
   });
   $('.toppings').html(menu.getToppings());
   $('.toppings div').each(function() {
+    if(pizza.toppings.indexOf($(this).html()) >= 0)
+      $(this).addClass('selected');
     $(this).click(function() {
       pizza.toggleTopping($(this).html());
       $(this).toggleClass('selected');
@@ -153,6 +165,6 @@ $(document).ready(function() {
   var pizza;
   $('#buildPizza').click(function() {
     pizza = new Pizza();
-    buildPizza(menu, pizza);
+    buildPizza(cart, menu, pizza);
   });
 });
