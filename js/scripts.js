@@ -55,3 +55,11 @@ Pizza.prototype.countToppings = function() {
 Pizza.prototype.removeTopping = function(topping) {
   this.toggleTopping(topping);
 }
+
+Pizza.prototype.getToppings = function() {
+  var output = '';
+  this.toppings.forEach(function(topping) {
+    output += '<div>' + topping + '</div>';
+  });
+  return output;
+}
