@@ -24,4 +24,11 @@ describe('Pizza', function() {
     pizza.size = menu.sizes[0];
     expect(pizza.size).to.equal('Personal 8"');
   });
+  it('Knows which toppings it has', function() {
+    var menu = new PizzaMenu();
+    var pizza = new Pizza();
+    pizza.addTopping(menu.toppings[0]);
+    expect(pizza.toppings[0]).to.equal('Pepperoni');
+  });
+  
 });
