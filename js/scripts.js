@@ -127,6 +127,12 @@ function updateCart(cart) {
         buildPizza(cart, new PizzaMenu(), cart.pizzas[$(this).attr('pizzaid')]);
       });
     });
+    $('.remove').each(function() {
+      $(this).click(function() {
+        cart.removePizza($(this).attr('pizzaid'));
+        updateCart(cart);
+      });
+    });
   }
 }
 
