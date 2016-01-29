@@ -105,6 +105,7 @@ function updateCurrentOrder(menu, pizza) {
 }
 
 $(document).ready(function() {
+  var cart = new Cart();
   var menu = new PizzaMenu();
   var pizza;
   $('#buildPizza').click(function() {
@@ -132,5 +133,8 @@ $(document).ready(function() {
         updateCurrentOrder(menu, pizza);
       });
     });
+    $('#addToCart').click(function() {
+
+    })
   });
 });

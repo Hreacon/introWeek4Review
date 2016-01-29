@@ -53,4 +53,12 @@ describe("Cart", function() {
     cart.addPizza(new Pizza());
     expect(cart.countPizzas()).to.equal(1);
   });
+  it('can tell you the total cost of all the pizzas', function() {
+    var cart = new Cart();
+    var pizza = new Pizza();
+    var menu = new PizzaMenu();
+    pizza.size = menu.sizez[0];
+    cart.addPizza(pizza);
+    expect(cart.getTotalCost()).to.equal(8.99);
+  })
 });
