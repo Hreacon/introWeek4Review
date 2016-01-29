@@ -13,3 +13,11 @@ PizzaMenu.prototype.costOfPizza = function(size, numOfToppings) {
   }
   return cost;
 }
+
+PizzaMenu.prototype.getToppings = function() {
+  var output = '';
+  this.toppings.forEach(function(topping) {
+    output += '<div>' + topping + '</div>';
+  });
+  return output;
+}
