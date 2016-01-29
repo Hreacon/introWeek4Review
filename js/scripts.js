@@ -196,5 +196,7 @@ $(document).ready(function() {
     cart.addPizza(pizza);
     buildPizza(cart, menu, pizza);
   });
-  
+  $("#checkout").click(function() {
+    $('#checkoutForm').show();
+  });
 });
