@@ -36,4 +36,13 @@ describe('Pizza', function() {
     pizza.addTopping(menu.toppings[0]);
     expect(pizza.countToppings()).to.equal(1);
   });
+
+  it('can remove toppings', function() {
+    var menu = new PizzaMenu();
+    var pizza = new Pizza();
+    pizza.addTopping(menu.toppings[0]);
+    pizza.addTopping(menu.toppings[2]);
+    pizza.removeTopping(menu.toppings[2]);
+    expect(pizza.countToppings()).to.equal(1);
+  });
 });

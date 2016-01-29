@@ -38,3 +38,10 @@ Pizza.prototype.addTopping = function(topping) {
 Pizza.prototype.countToppings = function() {
   return this.toppings.length;
 }
+
+Pizza.prototype.removeTopping = function(topping) {
+  var index = this.toppings.indexOf(topping);
+  if( index >= 0) {
+    this.toppings.splice(index, 1);
+  }
+}
