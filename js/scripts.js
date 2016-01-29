@@ -197,6 +197,32 @@ $(document).ready(function() {
     buildPizza(cart, menu, pizza);
   });
   $("#checkout").click(function() {
+    $('.landing').hide();
     $('#checkoutForm').show();
+  });
+  $("#checkoutForm form").submit(function(event) {
+    // check for all the inputs
+    var formData = [];
+    var mistakes = 0;
+    var index = 0;
+    $("#checkoutForm input").each(function() {
+      $(this).removeClass('mistake');
+      if($(this).val().length <=0) {
+        $(this).addClass('mistake');
+        mistakes++;
+      } else {
+        formData[index] = [$(this).attr('id'), $(this).val()];
+        index++;
+      }
+
+      if(mistakes === 0) {
+        $("#checkoutForm").hide();
+        $('.orderComplete').show();
+        formData.forEach(function(data) {
+          $('#output'+data[0]).text(data[1]);
+        });
+      }
+    });
+    event.preventDefault();
   });
 });

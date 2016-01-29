@@ -1,4 +1,4 @@
-.order, #checkout {
+.order, #checkout, #checkoutForm, .orderComplete {
   display: none;
 }
 
@@ -78,4 +78,8 @@
 }
 #checkoutForm input[type=submit] {
   width:100%;
+}
+
+.mistake {
+  border:2px solid red;
 }
