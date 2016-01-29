@@ -63,3 +63,31 @@ Pizza.prototype.getToppings = function() {
   });
   return output;
 }
+
+function updateCurrentOrder(pizza) {
+  var output = "Size: " + pizza.size + " Toppings: " + pizza.getToppings();
+  $('.currentOrder').html(output);
+}
+
+$(document).ready(function() {
+  var menu = new PizzaMenu();
+  var pizza;
+  $('#buildPizza').click(function() {
+    pizza = new Pizza();
+    $('.landing').hide();
+    $('.order').show();
+    $('.sizes').html(menu.getSizes());
+    $('.sizes div').each(function() {
+      $(this).click(function() {
+        pizza.size = $(this).html();
+        updateCurrentOrder(pizza);
+        console.log("New Pizza size = " + pizza.size);
+        $('.sizes div').each(function() {
+          $(this).removeClass('selected');
+        });
+        $(this).addClass('selected');
+      });
+    });
+    $('.toppings').html(menu.getToppings());
+  });
+});
