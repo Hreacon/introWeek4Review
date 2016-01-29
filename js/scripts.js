@@ -121,6 +121,12 @@ function updateCart(cart) {
   // show total
   if(cart.countPizzas() > 0) {
     $('#checkout').show();
+    $('#cart').html(cart.getPizzas());
+    $('.edit').each(function() {
+      $(this).click(function() {
+        buildPizza(cart, new PizzaMenu(), cart.pizzas[$(this).attr('pizzaid')]);
+      });
+    });
   }
 }
 
@@ -152,7 +158,6 @@ function buildPizza(cart, menu, pizza) {
     });
   });
   $('#addToCart').click(function() {
-    cart.addPizza(pizza);
     $('.order').hide();
     $('.landing').show();
     updateCart(cart);
@@ -165,6 +170,7 @@ $(document).ready(function() {
   var pizza;
   $('#buildPizza').click(function() {
     pizza = new Pizza();
+    cart.addPizza(pizza);
     buildPizza(cart, menu, pizza);
   });
 });
