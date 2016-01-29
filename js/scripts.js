@@ -100,11 +100,11 @@ Cart.prototype.getPizzas = function() {
 }
 
 Cart.prototype.cleanCart = function() {
-  this.pizzas.forEach(function(pizza, index) {
-    if(pizza.size.length === 0) {
-      this.removePizza(index);
+  for(var i = 0;i<this.pizzas.length;i++) {
+    if(this.pizzas[i].size.length === 0) {
+      this.removePizza(i,1);
     }
-  })
+  }
 }
 
 function updateCurrentOrder(menu, pizza) {
@@ -127,7 +127,7 @@ function updateCurrentOrder(menu, pizza) {
 function updateCart(cart) {
   // show current pizzas being ordered
   // show total
-  console.log("UpdateCart");
+  console.log("UpdateCart" + cart);
   cart.cleanCart();
   if(cart.countPizzas() > 0) {
     $('#checkout').show();
